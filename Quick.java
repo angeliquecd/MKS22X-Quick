@@ -1,9 +1,10 @@
+import java.util.Random;
 public class Quick {
   public static int partition(int[] data,int start,int end){
     Random rng = new Random();
     int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
     int pivot = data[index];
-    System.out.println(pivot);
+    //System.out.println(pivot);
     int stored=0;
     data[index]=data[start];
     data[start]=pivot;
@@ -15,8 +16,8 @@ public class Quick {
         data[end]=stored;//swaps with last one
         inc--;
         end--;//so that it doesn't go on forever
-      }
-      printarray(data);}
+      }}
+      //printarray(data);}
     //  System.out.println("done parsing");
     for (int i=start+1;i<=endy;i++){
       if (data[i]>pivot){
@@ -29,10 +30,17 @@ public class Quick {
     }
     return endy;
   //  printarray(data);
-  }  
+  }
 /*return the value that is the kth smallest value of the array.
  */
  public static int quickselect(int []data, int k){
-
+   int index = partition(data,0,data.length-1);
+   if (index==k) return data[index];
+   if (index<k){
+     partition(data,index,data.length-1);
+   }
+   if (index>k){
+     partition(data,0,index);
+   }
  }
 }
