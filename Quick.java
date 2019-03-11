@@ -34,7 +34,9 @@ public class Quick {
 /*return the value that is the kth smallest value of the array.
  */
  public static int quickselect(int []data, int k){
-   int index = partition(data,0,data.length-1);
+   selecthelper(data,k,0,data.length-1);}
+  public static int selecthelper(int[] data, int k, int start, int end){
+   int index = partition(data,start,end);
    if (index==k) return data[index];
    if (index<k){
      partition(data,index,data.length-1);
