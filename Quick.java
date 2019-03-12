@@ -4,7 +4,7 @@ public class Quick {
     Random rng = new Random();
     int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
     int pivot = data[index];
-    System.out.println("pivot: "+ pivot);
+  //  System.out.println("pivot: "+ pivot);
     int stored=0;
     data[index]=data[start];
     data[start]=pivot;
@@ -24,7 +24,7 @@ public class Quick {
 //System.out.println("in it");
         data[start]=data[i-1];
         data[i-1]=pivot;//finds correct spot
-        System.out.println("returning as index: "+ (i-1));
+      //  System.out.println("returning as index: "+ (i-1));
         return i-1;
       }
     }
@@ -40,14 +40,14 @@ public class Quick {
  }
   public static int selecthelper(int[] data, int k, int start, int end){
    int index = partition(data,start,end);
-   System.out.println(index);
-   toString(data);
-   if (index==k) return data[index];
+  // System.out.println(index);
+  // toString(data);
+   if (index==k) return data[index];//you are done
    else if (index<k){
-     return selecthelper(data,k,index+1,data.length-1);
+     return selecthelper(data,k,index+1,data.length-1);//only checks stuff to the right
    }
    else if (index>k){
-     return selecthelper(data,k,0,index-1);
+     return selecthelper(data,k,0,index-1);//only checks stuff to the left
    }
    return -1;//unreachable
  }
@@ -58,11 +58,11 @@ public class Quick {
  }
  public static void main (String[] args){
    int[]ary = { 2, 10, 15, 23, 0,  5};
-   System.out.println(quickselect(ary,0));
-   System.out.println(quickselect(ary,1));
-   System.out.println(quickselect(ary,2));
-   System.out.println(quickselect(ary,3));
-   System.out.println(quickselect(ary,4));
-   System.out.println(quickselect(ary,5));
+   System.out.println(quickselect(ary,0));//0
+   System.out.println(quickselect(ary,1));//2
+   System.out.println(quickselect(ary,2));//5
+   System.out.println(quickselect(ary,3));//10
+   System.out.println(quickselect(ary,4));//15
+   System.out.println(quickselect(ary,5));//23
  }
 }
