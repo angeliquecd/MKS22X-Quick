@@ -28,6 +28,8 @@ public class Quick {
         return i-1;
       }
     }
+      data[start]=data[endy];
+    data[endy]=pivot;
     return endy;
   //  printarray(data);
   }
@@ -42,10 +44,10 @@ public class Quick {
    toString(data);
    if (index==k) return data[index];
    else if (index<k){
-     selecthelper(data,k,index,data.length-1);
+     return selecthelper(data,k,index+1,data.length-1);
    }
    else if (index>k){
-     selecthelper(data,k,0,index);
+     return selecthelper(data,k,0,index-1);
    }
    return -1;//unreachable
  }
