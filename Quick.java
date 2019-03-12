@@ -38,6 +38,7 @@ public class Quick {
  public static int quickselect(int []data, int k){
    return selecthelper(data,k,0,data.length-1);
  }
+
   public static int selecthelper(int[] data, int k, int start, int end){
    int index = partition(data,start,end);
   // System.out.println(index);
@@ -66,10 +67,20 @@ public class Quick {
    System.out.println(quickselect(ary,5));//23
    int[] ary2 = new int[10000];
    Random rng = new Random();
-
    for (int i=0;i<10000;i++){
      ary2[i]=rng.nextInt()%10000;
    }
     System.out.println(quickselect(ary2,5));//23
+    int[] ary3 = new int[100000];
+    Random rng1 = new Random();
+    for (int i=0;i<100000;i++){
+      ary3[i]=rng1.nextInt()%10000;
+    }//stops working at 1000,000 long array
+     System.out.println(quickselect(ary3,35));//23
+    int [] ary4 = new int[10000];
+    for (int i=0;i<10000;i++){
+      ary4[i]= Math.abs(rng.nextInt()%2);
+    }
+    System.out.println(quickselect(ary4,890));
  }
 }
