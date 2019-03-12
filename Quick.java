@@ -4,7 +4,7 @@ public class Quick {
     Random rng = new Random();
     int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
     int pivot = data[index];
-    //System.out.println(pivot);
+    System.out.println("pivot: "+ pivot);
     int stored=0;
     data[index]=data[start];
     data[start]=pivot;
@@ -24,7 +24,7 @@ public class Quick {
 //System.out.println("in it");
         data[start]=data[i-1];
         data[i-1]=pivot;//finds correct spot
-      //  System.out.println(i-1);
+        System.out.println("returning as index: "+ (i-1));
         return i-1;
       }
     }
@@ -34,15 +34,28 @@ public class Quick {
 /*return the value that is the kth smallest value of the array.
  */
  public static int quickselect(int []data, int k){
-   selecthelper(data,k,0,data.length-1);}
+   return selecthelper(data,k,0,data.length-1);
+ }
   public static int selecthelper(int[] data, int k, int start, int end){
    int index = partition(data,start,end);
+   System.out.println(index);
+   toString(data);
    if (index==k) return data[index];
-   if (index<k){
-     partition(data,index,data.length-1);
+   else if (index<k){
+     selecthelper(data,k,index,data.length-1);
    }
-   if (index>k){
-     partition(data,0,index);
+   else if (index>k){
+     selecthelper(data,k,0,index);
    }
+   return -1;//unreachable
+ }
+ public static void toString(int[] data){
+   for (int a: data){
+     System.out.print(a+" ");
+   }
+ }
+ public static void main (String[] args){
+   int[]ary = { 2, 10, 15, 23, 0,  5};
+   System.out.println(quickselect(ary,0));
  }
 }
