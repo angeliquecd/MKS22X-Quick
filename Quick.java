@@ -64,5 +64,12 @@ public class Quick {
    System.out.println(quickselect(ary,3));//10
    System.out.println(quickselect(ary,4));//15
    System.out.println(quickselect(ary,5));//23
+   int[] ary2 = new int[10000];
+   Random rng = new Random();
+
+   for (int i=0;i<10000;i++){
+     ary2[i]=rng.nextInt()%10000;
+   }
+    System.out.println(quickselect(ary2,5));//23
  }
 }
