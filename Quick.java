@@ -2,33 +2,27 @@ import java.util.Random;
 public class Quick {
   public static int partition(int[] data,int start,int end){
     Random rng = new Random();
-    int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
-    int lowest;
-    int highest;
+  //  int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
     int lowestindex;
-    int highestindex; /*
-  //  toString(data);
-    if (data[0]<data[data.length-1]){
-     lowest= data[0];
-     lowestindex=0;}
+    int highestindex;
+    toString(data);
+    if (data[start]<data[end]){
+     lowestindex=start;}
     else {
-      lowest = data[data.length-1];
-      lowestindex=data.length-1;}
-    if (lowest>data[data.length/2]) {
-      lowest= data[data.length/2];
-      lowestindex=data.length/2;}
-    if (data[0]>data[data.length-1]) {
-      highest=data[0];
-      highestindex=0;}
-    else {
-      highest=data[data.length-1];
-      highestindex=data.length-1;}
-    if (highest<data[data.length/2]) {
-      highest=data[data.length/2];
-      highestindex=data.length/2;}
-    int index = data.length-1+data.length/2-lowestindex-highestindex;
-    //System.out.println("\n"+index);*/
-    int pivot = data[index];  //System.out.println("pivot: "+ pivot);
+      lowestindex=end;}
+    if (data[lowestindex]>data[(end-start+1)/2]) {
+      lowestindex=(end-start+1)/2;}//finds lowest value
+
+    if (data[start]>data[end]) {
+      highestindex=start;}
+    else{
+      highestindex=end;}
+    if (data[highestindex]<data[(end-start+1)/2]) {
+      highestindex=(end-start+1)/2;}//finds highest value
+      System.out.println(""+lowestindex+ highestindex);
+    int index = start+end+(end-start+1)/2-lowestindex-highestindex;//median index
+    System.out.println("\n"+index);
+    int pivot = data[index]; // System.out.println("pivot: "+ pivot);
     int stored=0;
     data[index]=data[start];
     data[start]=pivot;
@@ -88,7 +82,7 @@ public class Quick {
  public static void sorthelper(int[] data, int start, int end){
    if (start==end) return;
    int index=partition(data,start,end);
-   sorthelper(data, index,end);
+   sorthelper(data,index,end);
    sorthelper(data,start,index-1);
  }
  public static void toString(int[] data){
@@ -98,12 +92,12 @@ public class Quick {
  }
  public static void main (String[] args){
    int[]ary = { 2, 10, 15, 23, 0,  5};
-   System.out.println(quickselect(ary,0));//0
-   System.out.println(quickselect(ary,1));//2
-   System.out.println(quickselect(ary,2));//5
-   System.out.println(quickselect(ary,3));//10
-   System.out.println(quickselect(ary,4));//15
-   System.out.println(quickselect(ary,5));//23
+   System.out.println("returns: "+ quickselect(ary,0));//0
+   System.out.println("returns: "+quickselect(ary,1));//2
+   System.out.println("returns: "+quickselect(ary,2));//5
+   System.out.println("returns: "+quickselect(ary,3));//10
+   System.out.println("returns: "+quickselect(ary,4));//15
+   System.out.println("returns: "+quickselect(ary,5));//23
    int[] ary2 = new int[10000];
    Random rng = new Random();
    for (int i=0;i<10000;i++){
@@ -126,5 +120,7 @@ public class Quick {
       ary4[i]= Math.abs(rng.nextInt()%2);
     }
     System.out.println(quickselect(ary4,890));
+  //  quicksort(ary);
+  //  toString(ary);
  }
 }
