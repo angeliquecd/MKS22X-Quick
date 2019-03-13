@@ -2,17 +2,33 @@ import java.util.Random;
 public class Quick {
   public static int partition(int[] data,int start,int end){
     Random rng = new Random();
-    //int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
+    int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
     int lowest;
     int highest;
-    if (data[0]<data[data.length-1]) lowest= data[0];
-    else lowest = data[data.length-1];
-    if (lowest>data[data.length/2]) lowest= data[data.length/2];
-    if (data[0]>data[data.length-1]) highest=data[0];
-    else highest=data[data.length-1];
-    if (highest<data[data.length/2]) highest=data[data.length/2];
-    int index = data[0]+data[data.length-1]+data[data.length/2]-lowest-highest;
-    int pivot = data[index];  System.out.println("pivot: "+ pivot);
+    int lowestindex;
+    int highestindex; /*
+  //  toString(data);
+    if (data[0]<data[data.length-1]){
+     lowest= data[0];
+     lowestindex=0;}
+    else {
+      lowest = data[data.length-1];
+      lowestindex=data.length-1;}
+    if (lowest>data[data.length/2]) {
+      lowest= data[data.length/2];
+      lowestindex=data.length/2;}
+    if (data[0]>data[data.length-1]) {
+      highest=data[0];
+      highestindex=0;}
+    else {
+      highest=data[data.length-1];
+      highestindex=data.length-1;}
+    if (highest<data[data.length/2]) {
+      highest=data[data.length/2];
+      highestindex=data.length/2;}
+    int index = data.length-1+data.length/2-lowestindex-highestindex;
+    //System.out.println("\n"+index);*/
+    int pivot = data[index];  //System.out.println("pivot: "+ pivot);
     int stored=0;
     data[index]=data[start];
     data[start]=pivot;
@@ -65,10 +81,15 @@ public class Quick {
    return -1;//unreachable
  }
  /*Modify the array to be in increasing order.
- */
+*/
  public static void quicksort(int[] data){
-   int index = partition(data,start,end);
-   if (index==)
+   sorthelper(data,0,data.length-1);
+ }
+ public static void sorthelper(int[] data, int start, int end){
+   if (start==end) return;
+   int index=partition(data,start,end);
+   sorthelper(data, index,end);
+   sorthelper(data,start,index-1);
  }
  public static void toString(int[] data){
    for (int a: data){
