@@ -5,24 +5,21 @@ public class Quick {
   //  int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
     int lowestindex;
     int highestindex;
-    toString(data);
-    if (data[start]<data[end]){
-     lowestindex=start;}
-    else {
-      lowestindex=end;}
-    if (data[lowestindex]>data[(end-start+1)/2]) {
-      lowestindex=(end-start+1)/2;}//finds lowest value
-
-    if (data[start]>data[end]) {
-      highestindex=start;}
-    else{
-      highestindex=end;}
-    if (data[highestindex]<data[(end-start+1)/2]) {
-      highestindex=(end-start+1)/2;}//finds highest value
-      System.out.println(""+lowestindex+ highestindex);
+    //toString(data);
+  //  System.out.println("\n \n"+"start: "+start+"end: "+end);
+    if (data[start]<data[end])lowestindex=start;
+    else lowestindex=end;
+    if (data[lowestindex]>data[(end-start+1)/2]) lowestindex=(end-start+1)/2;
+    //finds lowest value
+    if (data[start]>data[end]) highestindex=start;
+    else highestindex=end;
+    if (data[highestindex]<data[(end-start+1)/2]) highestindex=(end-start+1)/2;
+    //finds highest value
+    if (highestindex==lowestindex) lowestindex=start;
+    //  System.out.println("\n"+lowestindex+","+ highestindex);
     int index = start+end+(end-start+1)/2-lowestindex-highestindex;//median index
     System.out.println("\n"+index);
-    int pivot = data[index]; // System.out.println("pivot: "+ pivot);
+    int pivot = data[index];  //System.out.println("pivot: "+ pivot);
     int stored=0;
     data[index]=data[start];
     data[start]=pivot;
@@ -30,7 +27,7 @@ public class Quick {
     int move=-1;
     for (int inc=0;start+1+inc<=end;inc++){
       if (data[start+1+inc]==pivot){
-        move = Math.abs(rng.nextInt()%2);
+        move = Math.abs(rng.nextInt()%2);//sets a 50% chance of being shifted
       }
       if (data[start+1+inc]>pivot ||move==0){
         stored=data[start+1+inc];
@@ -80,9 +77,9 @@ public class Quick {
    sorthelper(data,0,data.length-1);
  }
  public static void sorthelper(int[] data, int start, int end){
-   if (start==end) return;
+   if (start>=end) return;
    int index=partition(data,start,end);
-   sorthelper(data,index,end);
+   sorthelper(data,index+1,end);
    sorthelper(data,start,index-1);
  }
  public static void toString(int[] data){
@@ -92,35 +89,35 @@ public class Quick {
  }
  public static void main (String[] args){
    int[]ary = { 2, 10, 15, 23, 0,  5};
-   System.out.println("returns: "+ quickselect(ary,0));//0
+/*   System.out.println("returns: "+ quickselect(ary,0));//0
    System.out.println("returns: "+quickselect(ary,1));//2
    System.out.println("returns: "+quickselect(ary,2));//5
    System.out.println("returns: "+quickselect(ary,3));//10
    System.out.println("returns: "+quickselect(ary,4));//15
    System.out.println("returns: "+quickselect(ary,5));//23
-   int[] ary2 = new int[10000];
+   int[] ary2 = new int[100];
    Random rng = new Random();
-   for (int i=0;i<10000;i++){
+   for (int i=0;i<100;i++){
      ary2[i]=rng.nextInt()%10000;
    }
    int [] ary6 = new int[50];
    for (int i=0;i<50;i++){
      ary6[i]=4;
    }
-   System.out.println(quickselect(ary6,20));
-    System.out.println(quickselect(ary2,5));//23
+   System.out.println(quickselect(ary6,20)); //1
+    System.out.println(quickselect(ary2,5));//23 //2
     int[] ary3 = new int[100000];
     Random rng1 = new Random();
     for (int i=0;i<100000;i++){
       ary3[i]=rng1.nextInt()%10000;
     }//stops working at 1000,000 long array
-     System.out.println(quickselect(ary3,35));//23
+     System.out.println(quickselect(ary3,35));//23 //3
     int [] ary4 = new int[10000];
     for (int i=0;i<10000;i++){
       ary4[i]= Math.abs(rng.nextInt()%2);
     }
-    System.out.println(quickselect(ary4,890));
-  //  quicksort(ary);
-  //  toString(ary);
+    System.out.println(quickselect(ary4,890)); //4*/
+    quicksort(ary);
+    toString(ary);
  }
 }
