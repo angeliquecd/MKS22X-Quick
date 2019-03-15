@@ -5,51 +5,79 @@ public class Quick {
   //  int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
     int lowestindex;
     int highestindex;
-    //toString(data);
-  //  System.out.println("\n \n"+"start: "+start+"end: "+end);
+    System.out.println("\n Starting partition: ");
+    toString(data);
+    System.out.println("\n \n"+"start: "+start+"end: "+end);
     if (data[start]<data[end])lowestindex=start;
     else lowestindex=end;
-    if (data[lowestindex]>data[(end-start+1)/2]) lowestindex=(end-start+1)/2;
+    if (data[lowestindex]>data[(end+start)/2]) lowestindex=(end+start)/2;
     //finds lowest value
     if (data[start]>data[end]) highestindex=start;
     else highestindex=end;
-    if (data[highestindex]<data[(end-start+1)/2]) highestindex=(end-start+1)/2;
+    if (data[highestindex]<data[(end+start)/2]) highestindex=(end+start)/2;
     //finds highest value
     if (highestindex==lowestindex) lowestindex=start;
     //  System.out.println("\n"+lowestindex+","+ highestindex);
-    int index = start+end+(end-start+1)/2-lowestindex-highestindex;//median index
-  //  System.out.println("\n"+index);
-    int pivot = data[index];  //System.out.println("pivot: "+ pivot);
+    int index = start+end+(end+start)/2-lowestindex-highestindex;//median index
+  System.out.println("\n index: "+index);
+    int pivot = data[index];  System.out.println("pivot: "+ pivot);
     int stored=0;
     data[index]=data[start];
     data[start]=pivot;
     int endy=end;
     int move=-1;
+    toString(data);
+    //start=start+1;
     for (int inc=0;start+1+inc<=end;inc++){
+        // System.out.println("in for loop");
       if (data[start+1+inc]==pivot){
         move = Math.abs(rng.nextInt()%2);//sets a 50% chance of being shifted
       }
+      System.out.println("\n"+data[start+1+inc]+"\n");
       if (data[start+1+inc]>pivot ||move==0){
+        System.out.println(data[start+1+inc]+">" +pivot);
         stored=data[start+1+inc];
-        data[inc+start+1]=data[end];
+        data[start+1+inc]=data[end];
         data[end]=stored;//swaps with last one
         inc--;
+        //start--;
         end--;//so that it doesn't go on forever
       }
       move=-1;
+    //  start++;
+      System.out.println("new array: ");
+      toString(data);
+      System.out.println();
     }//printarray(data);
     //  System.out.println("done parsing");
-    for (int i=start+1;i<=endy;i++){
-      if (data[i]>pivot){//System.out.println("in it");
-        data[start]=data[i-1];
-        data[i-1]=pivot;//finds correct spot
-      //  System.out.println("returning as index: "+ (i-1));
-        return i-1;
+    /*
+    stored=data[index];
+    if (data[index]>data[start]){
+      data[index]=data[start];
+      data[start]=stored;
+      return start;
+    }
+    else{
+      data[index]=data[start-1];
+      data[start-1]=stored;
+      return start-1;
+    }
+  }*/
+toString(data);
+
+  //unreachable old code:
+    for (int i=endy;i>=0;i--){
+      if (data[i]<pivot){//System.out.println("in it");
+        data[start]=data[i];
+        System.out.println("start is: "+start+" "+data[start]+" "+(data[start]==pivot));
+        data[i]=pivot;//finds correct spot
+        System.out.println("returning as index: "+ (i));
+        return i;
       }
     }
-      data[start]=data[endy];
-    data[endy]=pivot;
-    return endy;
+      //data[start]=data[endy];
+    //data[endy]=pivot;
+    return start;
   //  printarray(data);
   }
 /*return the value that is the kth smallest value of the array.
@@ -89,6 +117,7 @@ public class Quick {
  }
  public static void main (String[] args){
    int[]ary = { 2, 10, 15, 23, 0,  5};
+   int[] ary2= {1,0,1,0,0,1,0,1,0,0,0,2,3,4,5 ,6 ,7, 9};/*
    System.out.println("returns: "+ quickselect(ary,0));//0
    System.out.println("returns: "+quickselect(ary,1));//2
    System.out.println("returns: "+quickselect(ary,2));//5
@@ -116,8 +145,11 @@ public class Quick {
     for (int i=0;i<10000;i++){
       ary4[i]= Math.abs(rng.nextInt()%2);
     }
-    System.out.println(quickselect(ary4,890)); //4
-    quicksort(ary);
-    toString(ary);
+    System.out.println(quickselect(ary4,890)); //4*/
+  //  quicksort(ary);
+    quicksort(ary2);
+    System.out.println();
+    toString(ary2);
+    //toString(ary);
  }
 }
