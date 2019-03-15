@@ -29,7 +29,7 @@ public class Quick {
   //  toString(data);
     //start=start+1;
     int shift = start+1;
-    while (shift<=endy){
+    while (shift<endy){
         // System.out.println("in for loop");
       if (data[shift]==pivot){
         move = Math.abs(rng.nextInt()%2);//sets a 50% chance of being shifted
