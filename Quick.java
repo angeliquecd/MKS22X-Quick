@@ -18,7 +18,7 @@ public class Quick {
     if (highestindex==lowestindex) lowestindex=start;
     //  System.out.println("\n"+lowestindex+","+ highestindex);
     int index = start+end+(end-start+1)/2-lowestindex-highestindex;//median index
-    System.out.println("\n"+index);
+  //  System.out.println("\n"+index);
     int pivot = data[index];  //System.out.println("pivot: "+ pivot);
     int stored=0;
     data[index]=data[start];
@@ -60,14 +60,14 @@ public class Quick {
 
   public static int selecthelper(int[] data, int k, int start, int end){
    int index = partition(data,start,end);
-  // System.out.println(index);
+   //System.out.println("index: "+index+"\n");
   // toString(data);
    if (index==k) return data[index];//you are done
    else if (index<k){
-     return selecthelper(data,k,index+1,data.length-1);//only checks stuff to the right
+     return selecthelper(data,k,index+1,end);//only checks stuff to the right
    }
    else if (index>k){
-     return selecthelper(data,k,0,index-1);//only checks stuff to the left
+     return selecthelper(data,k,start,index-1);//only checks stuff to the left
    }
    return -1;//unreachable
  }
@@ -89,7 +89,7 @@ public class Quick {
  }
  public static void main (String[] args){
    int[]ary = { 2, 10, 15, 23, 0,  5};
-/*   System.out.println("returns: "+ quickselect(ary,0));//0
+   System.out.println("returns: "+ quickselect(ary,0));//0
    System.out.println("returns: "+quickselect(ary,1));//2
    System.out.println("returns: "+quickselect(ary,2));//5
    System.out.println("returns: "+quickselect(ary,3));//10
@@ -116,7 +116,7 @@ public class Quick {
     for (int i=0;i<10000;i++){
       ary4[i]= Math.abs(rng.nextInt()%2);
     }
-    System.out.println(quickselect(ary4,890)); //4*/
+    System.out.println(quickselect(ary4,890)); //4
     quicksort(ary);
     toString(ary);
  }
