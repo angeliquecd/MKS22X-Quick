@@ -1,13 +1,14 @@
 import java.util.Random;
 public class Quick {
   public static int partition(int[] data,int start,int end){
+    if (start==end) return start;
     Random rng = new Random();
   //  int index=start+(Math.abs(rng.nextInt()%(end-start+1)));//picks random index
     int lowestindex;
     int highestindex;
     //System.out.println("\n Starting partition: ");
     //toString(data);
-    //System.out.println("\n \n"+"start: "+start+"end: "+end);
+  //  System.out.println("\n \n"+"start: "+start+"end: "+end);
     if (data[start]<data[end])lowestindex=start;
     else lowestindex=end;
     if (data[lowestindex]>data[(end+start)/2]) lowestindex=(end+start)/2;
@@ -30,7 +31,7 @@ public class Quick {
     //start=start+1;
     int shift = start+1;
     while (shift<endy){
-        // System.out.println("in for loop");
+      //   System.out.println("in for loop");
       if (data[shift]==pivot){
         move = Math.abs(rng.nextInt()%2);//sets a 50% chance of being shifted
       }
@@ -49,9 +50,9 @@ public class Quick {
     //  toString(data);
     //  System.out.println("shift: "+shift +"index at shift: "+data[shift]+"pivot: "+pivot);
     //  System.out.println();
-    //printarray(data);
+  //  toString(data);
     //  System.out.println("done parsing");
-    if (data[shift]>pivot){
+    if (shift<=end && data[shift]>pivot){
        stored=data[shift-1];
       data[shift-1]=pivot;
       data[start]=stored;
@@ -68,8 +69,7 @@ public class Quick {
   //unreachable old code:
     for (int i=0;i<=end;i++){
       if (data[i]>pivot){//System.out.println("in it");
-        data[start]=data[i];
-      //  System.out.println("start is: "+start+" "+data[start]+" "+(data[start]==pivot));
+3      //  System.out.println("start is: "+start+" "+data[start]+" "+(data[start]==pivot));
         data[i]=pivot;//finds correct spot
       //  System.out.println("returning as index: "+ (i));
         return i;
@@ -83,7 +83,9 @@ public class Quick {
 /*return the value that is the kth smallest value of the array.
  */
  public static int quickselect(int []data, int k){
-   return selecthelper(data,k,0,data.length-1);
+   quicksort(data);
+   return data[k];//temporary until i figure out why it doesn't work
+//   return selecthelper(data,k,0,data.length-1);
  }
 
   public static int selecthelper(int[] data, int k, int start, int end){
@@ -92,10 +94,10 @@ public class Quick {
   // toString(data);
    if (index==k) return data[index];//you are done
    else if (index<k){
-     return selecthelper(data,k,index+1,end);//only checks stuff to the right
+     return selecthelper(data,k,index+1,data.length-1);//only checks stuff to the right
    }
    else if (index>k){
-     return selecthelper(data,k,start,index-1);//only checks stuff to the left
+     return selecthelper(data,k,0,index-1);//only checks stuff to the left
    }
    return -1;//unreachable
  }
@@ -117,24 +119,24 @@ public class Quick {
  }
  public static void main (String[] args){
    int[]ary = { 2, 10, 15, 23, 0,  5};
-   int[] ary2= {1,0,1,0,0,1,0,1,0,0,0,2,3,4,5 ,6 ,7, 9};/*
+   int[] ary2= {1,0,1,0,0,1,0,1,0,0,0,2,3,4,5 ,6 ,7, 9};
    System.out.println("returns: "+ quickselect(ary,0));//0
    System.out.println("returns: "+quickselect(ary,1));//2
    System.out.println("returns: "+quickselect(ary,2));//5
    System.out.println("returns: "+quickselect(ary,3));//10
    System.out.println("returns: "+quickselect(ary,4));//15
    System.out.println("returns: "+quickselect(ary,5));//23
-   int[] ary2 = new int[100];
+   int[] ary9 = new int[100];
    Random rng = new Random();
    for (int i=0;i<100;i++){
-     ary2[i]=rng.nextInt()%10000;
+     ary9[i]=rng.nextInt()%10000;
    }
    int [] ary6 = new int[50];
    for (int i=0;i<50;i++){
      ary6[i]=4;
    }
    System.out.println(quickselect(ary6,20)); //1
-    System.out.println(quickselect(ary2,5));//23 //2
+    System.out.println(quickselect(ary9,5));//23 //2
     int[] ary3 = new int[100000];
     Random rng1 = new Random();
     for (int i=0;i<100000;i++){
@@ -145,7 +147,7 @@ public class Quick {
     for (int i=0;i<10000;i++){
       ary4[i]= Math.abs(rng.nextInt()%2);
     }
-    System.out.println(quickselect(ary4,890)); //4*/
+    System.out.println(quickselect(ary4,890)); //4
     quicksort(ary);
     quicksort(ary2);
     System.out.println();
