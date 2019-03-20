@@ -107,14 +107,15 @@ public class Quick {
    sorthelper(data,0,data.length-1);
  }
  public static void sorthelper(int[] data, int start, int end){
-   if (end-start<5) {
+   int base = 27;//by experimentation
+   if (end-start<base) {
      insertionSort(data, start,end+1);
      return;}
    int index=partition(data,start,end);
    sorthelper(data,index+1,end);
    sorthelper(data,start,index-1);
  }
- public static void insertionSort(int[] ary, int lo, int hi){
+ public static void insertionSort(int[] ary, int lo, int hi){//copied from old lab
    if (ary.length>0){
    boolean shifting;
    int stored1;
