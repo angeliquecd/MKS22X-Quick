@@ -107,20 +107,22 @@ public class Quick {
    sorthelper(data,0,data.length-1);
  }
  public static void sorthelper(int[] data, int start, int end){
-   if (start>=end) return;
+   if (end-start<5) {
+     insertionSort(data, start,end+1);
+     return;}
    int index=partition(data,start,end);
    sorthelper(data,index+1,end);
    sorthelper(data,start,index-1);
  }
- public static void insertionSort(int[] ary){
+ public static void insertionSort(int[] ary, int lo, int hi){
    if (ary.length>0){
    boolean shifting;
    int stored1;
    int stored;
-   for (int i=0;i<ary.length;i++){
+   for (int i=lo;i<hi;i++){
      shifting=false;
      stored=ary[i];
-   for (int b =0;b<i+1;b++){
+   for (int b =lo;b<i+1;b++){
        if (stored<ary[b]){
          shifting = true;} //finds correct place to start shifting
        if (shifting){//starts off the shift
@@ -137,7 +139,7 @@ public class Quick {
  }
  public static void main (String[] args){
    int[]ary = { 2, 10, 15, 23, 0,  5};
-   int[] ary2= {1,0,1,0,0,1,0,1,0,0,0,2,3,4,5 ,6 ,7, 9};
+   /*int[] ary2= {1,0,1,0,0,1,0,1,0,0,0,2,3,4,5 ,6 ,7, 9};
    System.out.println("returns: "+ quickselect(ary,0));//0
    System.out.println("returns: "+quickselect(ary,1));//2
    System.out.println("returns: "+quickselect(ary,2));//5
@@ -169,7 +171,10 @@ public class Quick {
     quicksort(ary);
     quicksort(ary2);
     System.out.println();
-    toString(ary2);
+    toString(ary2);*/
+    insertionSort(ary,0,ary.length);
+    toString(ary);
+    quicksort(ary);
     System.out.println();
     toString(ary);
  }
