@@ -69,7 +69,7 @@ public class Quick {
   //unreachable old code:
     for (int i=0;i<=end;i++){
       if (data[i]>pivot){//System.out.println("in it");
-3      //  System.out.println("start is: "+start+" "+data[start]+" "+(data[start]==pivot));
+      //  System.out.println("start is: "+start+" "+data[start]+" "+(data[start]==pivot));
         data[i]=pivot;//finds correct spot
       //  System.out.println("returning as index: "+ (i));
         return i;
@@ -111,6 +111,24 @@ public class Quick {
    int index=partition(data,start,end);
    sorthelper(data,index+1,end);
    sorthelper(data,start,index-1);
+ }
+ public static void insertionSort(int[] ary){
+   if (ary.length>0){
+   boolean shifting;
+   int stored1;
+   int stored;
+   for (int i=0;i<ary.length;i++){
+     shifting=false;
+     stored=ary[i];
+   for (int b =0;b<i+1;b++){
+       if (stored<ary[b]){
+         shifting = true;} //finds correct place to start shifting
+       if (shifting){//starts off the shift
+         stored1=ary[b];//stores value there
+         ary[b]=stored;//gives in past stored value
+         stored=stored1;}//stores new value as stored value to pass on
+   }
+ }}
  }
  public static void toString(int[] data){
    for (int a: data){
